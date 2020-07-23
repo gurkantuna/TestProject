@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Category>
+
+<div class="list-group" id="category-menu">
+    <a href="/Blog" class="list-group-item list-group-item-action
+       @(ViewBag.SelectedCategory==null?"active":string.Empty)">All Categories</a>
+
+    @foreach (var category in Model) {
+        <a href="/Blog/@category.Id"
+           class="list-group-item list-group-item-action
+           @(ViewBag.SelectedCategory==category.Id.ToString()?"active":string.Empty)">@category.Name</a>
+    }
+</div>

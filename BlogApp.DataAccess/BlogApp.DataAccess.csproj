@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>8</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200313203854_InitialCreate.cs" />
+    <Compile Remove="Migrations\20200313203854_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20200315202849_UpdateColumnCategoryNullable.cs" />
+    <Compile Remove="Migrations\20200315202849_UpdateColumnCategoryNullable.Designer.cs" />
+    <Compile Remove="Migrations\20200315203055_UpdateColumnCategoryNullable.cs" />
+    <Compile Remove="Migrations\20200315203055_UpdateColumnCategoryNullable.Designer.cs" />
+    <Compile Remove="Migrations\20200325111728_SampleMigration.cs" />
+    <Compile Remove="Migrations\20200325111728_SampleMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200325111945_SampleMigration.cs" />
+    <Compile Remove="Migrations\20200325111945_SampleMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200325112241_SampleMigration.cs" />
+    <Compile Remove="Migrations\20200325112241_SampleMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200325122344_AddCoreIdentity.cs" />
+    <Compile Remove="Migrations\20200325122344_AddCoreIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20200325125037_AddCoreIdentity.cs" />
+    <Compile Remove="Migrations\20200325125037_AddCoreIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20200330184639_AddLogTable.cs" />
+    <Compile Remove="Migrations\20200330184639_AddLogTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlogApp.Core\BlogApp.Core.csproj" />
+    <ProjectReference Include="..\BlogApp.Entity\BlogApp.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

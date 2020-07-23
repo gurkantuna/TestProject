@@ -1,0 +1,50 @@
+﻿@model string
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top justify-content-end">
+    <div class="container">
+        <div class="navbar">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link @( Model=="/"?"active":null)" href="/"><i class="fa fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @( Model.StartsWith("/Blog")?"active":null)" href="/Blog"><i class="fa fa-newspaper-o"></i> Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @( Model.StartsWith("/Operations")?"active":null)" asp-controller="Blogs" asp-action="List"><i class="fa fa-tasks"></i> Operations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @( Model.StartsWith("/Categories")?"active":null)" asp-controller="Categories" asp-action="Index"><i class="fa fa-th-large"></i> Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @( Model.StartsWith("/Users")?"active":null) " asp-controller="Users" asp-action="Index"><i class="fa fa-users"></i> Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @( Model.StartsWith("/Roles")?"active":null) " asp-controller="Roles" asp-action="Index"><i class="fa fa-user-secret"></i> Roles</a>
+                </li>
+                <li class="nav-item ml-2">
+                    <form class="form-inline my-2 my-lg-0" action="/Blog">
+                        <input id="q" name="q" class="form-control mr-sm-2" type="search" placeholder="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search <i class="fa fa-search"></i></button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        @if (User.Identity.IsAuthenticated) {
+            <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+
+                <ul class="navbar-nav mt-2 mt-lg-0 text-right">
+                    <li class="nav-item">
+                        <span class="nav-link">
+                            Welcome @User.Identity.Name
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i></a>
+                    </li>
+                </ul>
+            </div>
+        }
+    </div>
+</nav>
+

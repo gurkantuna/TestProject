@@ -1,0 +1,20 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="container">
+    <h2>Category Update</h2>
+    <form asp-action="Update" asp-controller="Categories" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-controller="Categories" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

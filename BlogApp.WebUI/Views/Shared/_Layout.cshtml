@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+    var path = Url?.ActionContext?.HttpContext?.Request?.Path.ToString();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BlogApp - @ViewData["Title"]</title>
+    <environment names="Production"><link href="~/css/bundle.min.css" rel="stylesheet" /></environment>
+    <environment names="Development,Staging"><link href="~/css/bundle.min.css" rel="stylesheet" /></environment>
+    @RenderSection("head", false)
+</head>
+<body>
+    <partial name="_navbar" model="path" />
+    <div id="main" style="margin-top:75px;">
+        @if (TempData["message"] != null) {
+            <div class="container alert alert-info mt-3">@TempData["message"]</div>
+        }
+        @RenderBody()
+        <partial name="_footer" />
+    </div>
+    <environment names="Production"><script src="~/js/bundle.min.js"></script></environment>
+    <environment names="Development,Staging"><script src="~/js/bundle.js"></script></environment>
+    @RenderSection("script", false)
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-3">
+            @await Component.InvokeAsync("Category")
+        </div>
+        <div class="col-md-9">
+            @if (Model.Any()) {
+                <partial name="_BlogList" model="@Model" />
+            }
+            else {
+                <div class="alert alert-warning">There is no any blog!</div>
+            }
+        </div>
+    </div>
+</div>

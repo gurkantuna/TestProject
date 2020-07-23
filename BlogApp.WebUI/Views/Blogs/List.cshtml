@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Operations";
+}
+
+<div class="container">
+    <h2>Blog List</h2>
+    <hr />
+    <a asp-action="Create" asp-controller="Blogs" class="btn btn-primary">Create Blog</a>
+    <hr />
+    <div class="row">
+        <div class="col">
+            @if (Model.Any()) {
+                <table class="table table-bordered table-striped mt-3" id="tblBlogs">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Is Approved</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var blog in Model) {
+                            <tr>
+                                <td>@blog.Id</td>
+                                <td>
+                                    <a asp-controller="Blogs" asp-action="Detail" asp-route-id="@blog.Id" target="_blank">
+                                        <img src="~/img/@blog.ImageThumb" alt="@blog.Title">
+                                    </a>
+                                </td>
+                                <td>@blog.Title</td>
+                                <td>@blog.Date</td>
+                                <td>@blog.Category?.Name</td>
+                                <td>
+                                    @if (blog.IsApproved) {
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    }
+                                    else {
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm fa fa-search" asp-controller="Blogs" asp-action="Detail" asp-route-id="@blog.Id" target="_blank"></a>
+                                    <a class="btn btn-dark btn-sm fa fa-pencil" asp-controller="Blogs" asp-action="Update" asp-route-id="@blog.Id"></a>
+                                    <a class="btn btn-danger btn-sm fa fa-remove btnDel" data-id="@blog.Id" href="javascript:;"></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else {
+                <div class="alert alert-warning">There is no any blog!</div>
+            }
+        </div>
+    </div>
+</div>
+@section script{
+    <script>
+        $('#tblBlogs').on('click', '.btnDel', function () {
+            AjaxDelete('/Blogs/Delete/', this);
+        });
+
+                    //$('.btnDel').click(function () {
+                    //    AjaxDelete('/Blogs/Delete/', this);
+                    //});
+    </script>
+}

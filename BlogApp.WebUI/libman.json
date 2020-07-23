@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "bootstrap@4.4.1",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@3.4.1",
+      "destination": "wwwroot/lib/jquery"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "tether@1.4.7",
+      "destination": "wwwroot/lib/tether/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "popper.js@1.16.1",
+      "destination": "wwwroot/lib/popper.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "bootbox.js@5.4.0",
+      "destination": "wwwroot/lib/bootbox.js/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "ckeditor@4.12.1",
+      "destination": "wwwroot/lib/ckeditor/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-validate@1.19.1",
+      "destination": "wwwroot/lib/jquery/jquery-validate/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery-validation-unobtrusive@3.2.11",
+      "destination": "wwwroot/lib/jquery/jquery-validation-unobtrusive/"
+    }
+  ]
+}

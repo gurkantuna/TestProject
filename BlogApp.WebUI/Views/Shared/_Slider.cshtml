@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Blog>
+
+<div id="carouselExampleCaptions" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @for (int i = 0; i < Model.Count(); i++) {
+
+            if (i == 0) {
+                <li data-target="#carouselExampleCaptions" data-slide-to="@i" class="active"></li>
+            }
+            else {
+                <li data-target="#carouselExampleCaptions" data-slide-to="@i" class="active"></li>
+            }
+        }
+    </ol>
+    <div class="carousel-inner">
+        @{ var index = 0;}
+
+        @foreach (var blog in Model) {
+            if (index == 0) {
+                <div class="carousel-item active">
+                    <a asp-controller="Blogs" asp-action="Detail" asp-route-id="@blog.Id">
+                        <img src="~/img/@blog.Image" class="d-block w-100" alt="@blog.Title">
+                    </a>
+
+                    <div class="carousel-caption d-none d-md-block transbox">
+                        <h5>@blog.Title</h5>
+                        <p>@blog.Description</p>
+                    </div>
+                </div>
+            }
+            else {
+                <div class="carousel-item">
+                    <a asp-controller="Blogs" asp-action="Detail" asp-route-id="@blog.Id">
+                        <img src="~/img/@blog.Image" class="d-block w-100" alt="@blog.Title">
+                    </a>
+                    <div class="carousel-caption d-none d-md-block transbox">
+                        <h5>@blog.Title</h5>
+                        <p>@blog.Description</p>
+                    </div>
+                </div>
+            }
+
+            index++;
+        }
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>

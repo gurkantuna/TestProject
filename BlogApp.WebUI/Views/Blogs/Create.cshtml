@@ -1,0 +1,59 @@
+﻿@model Blog
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <h2>Create Blog</h2>
+    <div class="alert-danger" asp-validation-summary="All"></div>
+    <form asp-action="Create" asp-controller="Blogs" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <div><span class="text-danger" asp-validation-for="Title"></span></div>
+            <input asp-for="Title" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <div><span class="text-danger" asp-validation-for="Description"></span></div>
+            <textarea asp-for="Description" class="form-control" maxlength="500" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Body"></label>
+            <div><span class="text-danger" asp-validation-for="Body"></span></div>
+            <textarea asp-for="Body" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Image"></label>
+            <div><span class="text-danger" asp-validation-for="Image"></span></div>
+            <input type="file" name="file" id="file" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Category"></label>
+            <div><span class="text-danger" asp-validation-for="CategoryId"></span></div>
+            <select asp-for="CategoryId"
+                    asp-items="ViewBag.Categories" class="form-control">
+                <option selected disabled>Select Category</option>
+            </select>
+        </div>
+
+        <div class="form-group form-check">
+            <input class="form-check-input" asp-for="IsApproved" checked>
+            <label class="form-check-label" asp-for="IsApproved">Is Approved</label>
+        </div>
+
+        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+        <a class="btn btn-secondary" asp-controller="Blogs" asp-action="List"><i class="fa fa-window-close"></i> Cancel</a>
+    </form>    
+</div>
+
+@section script{
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("Body");        
+    </script>
+}

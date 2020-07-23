@@ -1,0 +1,19 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="container">
+    <h2>Create Category</h2>
+    <div asp-validation-summary="All"></div>
+    <form asp-action="Create" asp-controller="Categories" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <div><span class="text-danger" asp-validation-for="Name"></span></div>
+            <input asp-for="Name" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
+        <a class="btn btn-secondary" asp-controller="Categories" asp-action="List"><i class="fa fa-window-close"></i> Cancel</a>
+    </form>
+</div>

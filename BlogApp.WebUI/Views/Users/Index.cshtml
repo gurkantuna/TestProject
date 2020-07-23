@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AppUser>
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="container">
+    <h2>User List</h2>
+    <hr />
+    <a asp-action="Create" asp-controller="Users" class="btn btn-primary">Create User</a>
+    <hr />
+    <div class="row">
+        <div class="col">
+            @if (Model.Any()) {
+                <table class="table table-bordered table-striped" id="tblUsers">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>UserName</th>
+                            <th>E-mail</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model) {
+                            <tr>
+                                <td>@user.Id</td>
+                                <td>@user.UserName</td>
+                                <td>@user.Email</td>
+                                <td>
+                                    <a class="btn btn-dark btn-sm fa fa-pencil" asp-controller="Users" asp-action="Update" asp-route-id="@user.Id"></a>
+                                    <a class="btn btn-danger btn-sm fa fa-remove btnDel" data-id="@user.Id" href="javascript:;"></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else {
+                <div class="alert alert-warning">There is no any user!</div>
+            }
+        </div>
+    </div>
+</div>
+@section script{
+    <script>
+        $('#tblUsers').on('click', '.btnDel', function () {
+            AjaxDelete('/Users/Delete/', this);
+        });
+    </script>
+}
