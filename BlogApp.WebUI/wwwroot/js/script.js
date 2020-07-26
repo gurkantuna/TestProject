@@ -9,9 +9,17 @@
                 type: 'get',
                 url: url + id,
                 success: function (jsonObject) {
-                    console.log('Silinen nesne:');
-                    console.log(jsonObject);
-                    $(clickedObject).closest('tr').fadeToggle('slow');
+                    if (jsonObject.includes("401")) {
+                        bootbox.alert('You are not logged in!');
+                    }
+                    else if (jsonObject.includes("403") || jsonObject.includes("405")) {
+                        bootbox.alert('You have not authorized!!');
+                    }
+                    else {
+                        console.log('Silinen nesne:');
+                        console.log(jsonObject);
+                        $(clickedObject).closest('tr').fadeToggle('slow');
+                    }
                 },
                 error: function (response) {
                     console.log("Error!!!");

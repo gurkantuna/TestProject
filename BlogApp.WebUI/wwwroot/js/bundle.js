@@ -31413,6 +31413,20 @@ return jQuery;
 })));
 //# sourceMappingURL=bootstrap.js.map
 
+/* Yandex.Metrika counter */
+(function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+        m[i].l = 1 * new Date(); k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+ym(65902951, "init", {
+    clickmap: true,
+    trackLinks: true,
+    accurateTrackBounce: true,
+    webvisor: true
+});
+/* Yandex.Metrika counter */
 function AjaxDelete(url, clickedObject) {
     debugger;
     bootbox.confirm('Do you really want to delete this object?', function (response) {
@@ -31424,9 +31438,17 @@ function AjaxDelete(url, clickedObject) {
                 type: 'get',
                 url: url + id,
                 success: function (jsonObject) {
-                    console.log('Silinen nesne:');
-                    console.log(jsonObject);
-                    $(clickedObject).closest('tr').fadeToggle('slow');
+                    if (jsonObject.includes("401")) {
+                        bootbox.alert('You are not logged in!');
+                    }
+                    else if (jsonObject.includes("403") || jsonObject.includes("405")) {
+                        bootbox.alert('You have not authorized!!');
+                    }
+                    else {
+                        console.log('Silinen nesne:');
+                        console.log(jsonObject);
+                        $(clickedObject).closest('tr').fadeToggle('slow');
+                    }
                 },
                 error: function (response) {
                     console.log("Error!!!");
