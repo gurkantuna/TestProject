@@ -31413,33 +31413,34 @@ return jQuery;
 })));
 //# sourceMappingURL=bootstrap.js.map
 
-function AjaxDelete(url, clickedObject) {
-    debugger;
-    bootbox.confirm('Do you really want to delete this object?', function (response) {
-        if (response) {
+const deleteObject = (url, clickedObject) => {
 
-            var id = $(clickedObject).data('id');
-            debugger;
+    bootbox.confirm('Do you really want to delete this object?', function(removeOk) {
+        if (removeOk) {
+
+            const id = $(clickedObject).data('id');
+
             $.ajax({
                 type: 'get',
-                url: url + id,
-                success: function (jsonObject) {
-                    if (jsonObject.includes("401")) {
-                        bootbox.alert('You are not logged in!');
-                    }
-                    else if (jsonObject.includes("403") || jsonObject.includes("405")) {
-                        bootbox.alert('You have not authorized!!');
+                url: `${url}/${id}`,
+                success: function(response) {
+                    if (response.id) {
+                        $(clickedObject).closest('tr').fadeToggle('slow');
+                        console.log('Deleted object:');
+                        console.log(response);
                     }
                     else {
-                        console.log('Silinen nesne:');
-                        console.log(jsonObject);
-                        $(clickedObject).closest('tr').fadeToggle('slow');
+                        if (response.includes("401")) {
+                            bootbox.alert('You are not logged in!');
+                        }
+                        else if (response.includes("403") || response.includes("405")) {
+                            bootbox.alert('You have not authorized!!');
+                        }
                     }
                 },
-                error: function (response) {
+                error: function(response) {
                     console.log("Error!!!");
                     console.log(response);
-                    debugger;
 
                     if (response.status == 401) {
                         bootbox.alert('You are not logged in!');

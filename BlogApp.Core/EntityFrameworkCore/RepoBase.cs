@@ -10,17 +10,16 @@ namespace BlogApp.Core.EntityFramework {
     public abstract class RepoBase<TEntity, TContext> : IRepoBase<TEntity>
     where TEntity : class, IEntity, new()
         where TContext : DbContext, new() {
+        
         private DbContext _dbContext;
 
         public TEntity Get(Expression<Func<TEntity, bool>> expression) {
-
             using (_dbContext = new TContext()) {
                 return _dbContext.Set<TEntity>().FirstOrDefault(expression);
             }
         }
 
         public IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>> expression = null) {
-
             using (_dbContext = new TContext()) {
                 return expression != null ?
                             _dbContext.Set<TEntity>().Where(expression).ToList()
@@ -29,7 +28,6 @@ namespace BlogApp.Core.EntityFramework {
         }
 
         public void Add(TEntity entity) {
-
             using (_dbContext = new TContext()) {
                 _dbContext.Entry(entity).State = EntityState.Added;
                 _dbContext.SaveChanges();//TODO: UnitOfWork'e çevrilebilir.
@@ -37,7 +35,6 @@ namespace BlogApp.Core.EntityFramework {
         }
 
         public void Update(TEntity entity) {
-
             using (_dbContext = new TContext()) {
                 _dbContext.Entry(entity).State = EntityState.Modified;
                 _dbContext.SaveChanges();
@@ -45,7 +42,6 @@ namespace BlogApp.Core.EntityFramework {
         }
 
         public void Delete(TEntity entity) {
-
             using (_dbContext = new TContext()) {
                 _dbContext.Entry(entity).State = EntityState.Deleted;
                 _dbContext.SaveChanges();

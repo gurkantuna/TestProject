@@ -33,7 +33,7 @@ namespace BlogApp.WebUI.Controllers {
             return View(articles);
         }
 
-        [Route("/Blog/{categoryId?}")]
+        [Route("/blog/{categoryId?}")]
         public IActionResult List(int? categoryId, string q) {
 
             IEnumerable articles;

@@ -25,6 +25,11 @@ namespace BlogApp.WebUI {
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
+            services.AddRouting(options => {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+            });
+
             services.AddTransient<IArticleRepo, ArticleRepo>();
             services.AddTransient<ICategoryRepo, CategoryRepo>();
             services.AddTransient<IUserRolesRepo, UserClaimsRepo>();

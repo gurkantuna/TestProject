@@ -29,7 +29,7 @@ namespace BlogApp.WebUI.Controllers {
             return View();
         }
 
-        [Route("/Operations")]
+        [Route("/operations")]
         public IActionResult List() {
 
             var log = new Log {

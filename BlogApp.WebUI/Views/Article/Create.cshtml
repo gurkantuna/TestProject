@@ -48,12 +48,15 @@
 
         <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Save</button>
         <a class="btn btn-secondary" asp-controller="Article" asp-action="List"><i class="fa fa-window-close"></i> Cancel</a>
-    </form>    
+    </form>
 </div>
 
-@section script{
+@section script {
     <script src="~/lib/ckeditor/ckeditor.js"></script>
     <script>
-        CKEDITOR.replace("Body");        
+        document.addEventListener("DOMContentLoaded", () => {
+            CKEDITOR.replace("Body");
+            document.querySelector("#Title").focus({ focusVisible: true });
+        });
     </script>
 }

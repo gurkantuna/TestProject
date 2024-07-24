@@ -14,7 +14,7 @@ namespace BlogApp.WebUI.Controllers {
 
         private readonly ILogRepo _logRepo;
 
-        [Route("Error")]
+        [Route("error")]
         public IActionResult Error() {
             var exceptionfeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
@@ -31,7 +31,7 @@ namespace BlogApp.WebUI.Controllers {
             return View();
         }
 
-        [Route("Error/{statusCode}")]
+        [Route("error/{statusCode}")]
         public IActionResult Error(int statusCode) {
 
             var status = (HttpStatusCode)statusCode;

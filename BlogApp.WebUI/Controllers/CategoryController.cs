@@ -1,4 +1,6 @@
-﻿using BlogApp.DataAccess.EntitFrameworkCore.Abstract;
+﻿using System.Linq;
+using System.Security.Claims;
+using BlogApp.DataAccess.EntitFrameworkCore.Abstract;
 using BlogApp.Entity.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,16 @@ namespace BlogApp.WebUI.Controllers {
 
         public IActionResult Index() {
             var categories = _categoryRepo.GetList();
+
+            var userIdentity = (ClaimsIdentity)User.Identity;
+            var claims = userIdentity.Claims;
+            var roleClaimType = userIdentity.RoleClaimType;
+            var roles = claims.Where(c => c.Type == roleClaimType).ToList();
+            var isAdmin = false;
+            if (roles.FirstOrDefault(x => x.Value.Equals("Admin", System.StringComparison.CurrentCultureIgnoreCase)) != null) {
+                isAdmin = true;
+            }
+            ViewBag.IsAdmin = isAdmin;
             return View(categories);
         }
 
@@ -44,11 +56,9 @@ namespace BlogApp.WebUI.Controllers {
 
         [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? id) {
-
             if (id == null) {
                 return BadRequest();
             }
-
             var category = _categoryRepo.Get(x => x.Id == id);
             _categoryRepo.Delete(category);
             return Json(category);

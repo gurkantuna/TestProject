@@ -62,7 +62,7 @@
 @section script{
     <script>
         $('#tblArticle').on('click', '.btnDel', function () {
-            AjaxDelete('/Article/Delete/', this);
+            deleteObject('/article/delete', this);
         });
     </script>
 }

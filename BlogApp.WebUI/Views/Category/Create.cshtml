@@ -17,3 +17,11 @@
         <a class="btn btn-secondary" asp-controller="Category" asp-action="List"><i class="fa fa-window-close"></i> Cancel</a>
     </form>
 </div>
+
+@section script {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {            
+            document.querySelector("#Name").focus({ focusVisible: true });
+        });
+    </script>
+}
