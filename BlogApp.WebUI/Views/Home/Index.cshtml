@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blog>
+﻿@model IEnumerable<Article>
 @{
     ViewData["Title"] = "Home";
 }
@@ -7,32 +7,31 @@
     <div class="row mt-3">
         <div class="col-md-12">
             <partial name="_Slider" model="@Model.OrderBy(x => x.Date).Take(5)" />
-            <h2>Proje Hakkında</h2>
+            <h2>About the Project</h2>
             <ul>
-                <li>.NET Core 3.1</li>
-                <li>C# 8.0</li>
-                <li>MSSQL Server 2017</li>
-                <li>Entity Framework Core 3.1.5</li>
+                <li>.NET 8</li>
+                <li>C# 10</li>
+                <li>MSSQL Server 2019</li>
+                <li>Entity Framework Core</li>
                 <li>Code First with Migrations</li>
                 <li>ASP.NET Core Identity</li>
             </ul>
             <p class="home-p">
-                Projenin <a href="https://github.com/gurkantuna/BlogApp" target="_blank">github.com/gurkantuna/BlogApp</a> github linkinde kodlar public repo içinde ulaşılabilir durumdadır. EF Migration kullandığım için SQL Server çalışan herhangi bir makine ile local db otomatik oluşturularak proje çalışır duruma gelecektir. Local dışında farklı bağlantı dizeleri de verilebilecek şekilde appsettings.{Environment}.json dosyayı da domain içinde bıraktım.
+                The codes are available in the public repo at the github <a href="https://github.com/gurkantuna/BlogApp" target="_blank">github.com/gurkantuna/BlogApp</a> link. Since I use EF Migration, the local db will be created automatically on any machine running SQL Server and the project will be operational. I also left the appsettings.{Environment}.json file in the presentation layer so that different connection strings other than local can be given.                
             </p>
             <p class="home-p">
-                .NET Core ile oluşturduğum bir örnek projedir. Basitliği korumak adına ve sıradan bir blog projesi olduğu için <b>Core, Entity, DataAccess ve UI</b> olmak üzere katmanları sade tuttum.
-                <b>Microservice benzeri ya da api gateway gibi bir mimari bulunmamaktadır.</b> Örnek bir proje olmasından dolayı sadece temel ihtiyaçlar ve kısmen görsellik gözetmek durumunda kaldığım için Business, Web Service, Web API gibi katmanları yazmaya gerek duymadım. Kendi hostingimdeki subdomain sınırlamasından dolayı iis virtual directory üzerinde çalışıyor, bu yüzden bazı route ayarlarını manuel yapmak durumunda kaldım.
-                Fakat veri çekme, güncelleme, silme gibi rutin işlemleri kendi projelerim için .NET Core ile yazdığım GurkanTuna.Core.dll library ile oluşturdum.
-                <b>
-                    Core dll için oluşturduğum asıl projede SOLID principles, Aspect Oriented Programming, Logging, Caching, Authentication , Authorization, Exception Handling, Performance Monitoring, Repository Pattern,
-                    Unit of WorkPattern, Business Layer, Web API
-                </b> gibi enterprise projeler için gerekli <b>'Cross Cutting Concerns'</b> ve yaklaşımlar bulunuyor. İhtiyacı karşılamakla birlikte zaman zaman refactor yapıyorum.
+                This is an example project I created with .NET Core. To maintain simplicity and because it is an ordinary blog project, I wrote the functions without any pattern or principle that's why some functions repated in controllers.
+                And also, I kept the layers simple: <b>Core, Entity, DataAccess and Presentation</b>. There is no architecture similar to microservice or API gateway. Since it was an example project,
+                I did not need to write layers such as Business, <b>Web Service and Web API</b> as I only had to take care of the basic needs and partial visuality.
+                Due to the subdomain limitation in my own hosting, IIS runs on virtual directory, so I had to make some route settings manually. However, I created routine operations such as select, insert, update and delete with the GurkanTuna.Core library,
+                which I wrote with .NET Core for my own projects. In the main project I created for the Core, <b>SOLID principles, Aspect Oriented Programming, Logging, Caching, Authentication, Authorization, Exception Handling, Performance Monitoring, Repository Pattern, Unit of WorkPattern, Business Layer, 'Cross Cutting Concerns'</b> and there are approaches. I refactor it from time to time according to my new requirements.              
             </p>
             <p class="home-p">
-                Ayrıca az da olsa görsellik için bootstrap dışında minify edilmiş şekilde lightbox, font-awesome,bootbox, ckeditor, popper gibi küçük js libraryleri de kullandım. Media dosyalar dışında js ve css için sadece birer request gitmektedir. Bu arada böyle yarı Türkçe yarı İngilizce konuşan biri değilim :) Ama bazen yazarken birebir karşılığı olmadığı zaman hepsi birbirine girmek zorunda kalıyor maalesef.
+                I also used minified small js libraries such as lightbox, font-awesome, bootbox, ckeditor, popper, other than bootstrap, for a little visual appeal. Except for media files, only one request is made for js and css.
             </p>
             <p class="home-p">
-                "member" kullanıcı adı ve "123" şifresi ile Operations linkinden blog ekleme vb. işlemler yapılabilir. Authorization örneklendirme için normalde admin panelinden ulaşılan Users, Cliams vb. linkleri de navbar'a ekledim. Fakat tahmin edileceği üzere sadece admin şifresi ile ulaşılabilir durumdadır.
+                Adding a blog etc. from the operations link with the username "member" and password "123" functions can be executed. To exemplify authorization, Users, Claims, etc., which are normally accessed from the admin panel.
+                I added the links to the navbar. However, it is only visible with the admin password.
             </p>
             <p class="font-italic text-right">Gürkan Tuna</p>
         </div>

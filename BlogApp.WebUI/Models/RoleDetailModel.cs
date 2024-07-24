@@ -1,6 +1,6 @@
-﻿using BlogApp.Entity.Concrete;
+﻿using System.Collections.Generic;
+using BlogApp.Entity.Concrete;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 
 namespace BlogApp.WebUI.Models {
     public class RoleDetailModel {

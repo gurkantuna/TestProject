@@ -9,6 +9,6 @@ namespace BlogApp.Entity.Concrete {
         [Required, StringLength(maximumLength: 20, MinimumLength = 3)]
         public string Name { get; set; }
 
-        public List<Blog> Blogs { get; set; }
+        public List<Article> Articles { get; set; }
     }
 }

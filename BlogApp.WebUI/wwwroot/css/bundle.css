@@ -12911,3 +12911,7 @@ a {
     font-weight: 300;
     text-align: justify
 }
+
+td {
+    vertical-align: baseline !important;
+}

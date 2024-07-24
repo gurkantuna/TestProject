@@ -1,12 +1,12 @@
-﻿using BlogApp.DataAccess.Abstract;
+﻿using BlogApp.DataAccess.EntitFrameworkCore.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.WebUI.ViewComponents {
     public class CategoryViewComponent : ViewComponent {
 
-        private readonly ICategoryDal _categoryDal;
+        private readonly ICategoryRepo _categoryDal;
 
-        public CategoryViewComponent(ICategoryDal categoryDal) {
+        public CategoryViewComponent(ICategoryRepo categoryDal) {
             _categoryDal = categoryDal;
         }
 

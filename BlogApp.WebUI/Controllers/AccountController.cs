@@ -1,21 +1,21 @@
-﻿using BlogApp.Entity.Concrete;
+﻿using System.Threading.Tasks;
+using BlogApp.Entity.Concrete;
 using BlogApp.WebUI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace BlogApp.WebUI.Controllers {
     [Authorize]
     public class AccountController : Controller {
 
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
-
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) {
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
         [AllowAnonymous]
         public IActionResult AccessDenied(string returnUrl) {
@@ -49,7 +49,7 @@ namespace BlogApp.WebUI.Controllers {
 
             return View(loginModel);
         }
-        
+
         public async Task<IActionResult> LogOut() {
             await _signInManager.SignOutAsync();
             return Redirect("/");

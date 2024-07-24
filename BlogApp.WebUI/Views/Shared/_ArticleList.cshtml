@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Article>
+
+@foreach (var article in Model) {
+    <div class="card mb-2">
+        <div class="card-header">
+            <i class="btn btn-dark btn-sm fa fa-calendar"></i>  @article.Date.ToString("g")
+            <text class="float-right font-weight-bold">@article.Category?.Name</text>
+        </div>
+        <a asp-controller="Article" asp-action="Detail" asp-route-id="@article.Id">
+            <img src="~/img/@article.Image" class="card-img-top" alt="@article.Title">
+        </a>
+        <div class="card-body font-weight-light">
+            <h5 class="card-title">@article.Title</h5>
+            <hr />
+            <p class="card-text font-italic">@article.Description</p>
+            <p class="card-text">@Html.Raw(article.Body?.Length > 200 ? $"{article.Body?.Substring(0, 200)}..." : article.Body)</p>
+            <a asp-controller="Article" asp-action="Detail" asp-route-id="@article.Id" class="btn btn-dark btn-sm">
+                Read more <i class="fa fa-play"></i>
+            </a>
+        </div>
+    </div>
+}

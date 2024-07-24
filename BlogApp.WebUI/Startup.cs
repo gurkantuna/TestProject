@@ -1,7 +1,9 @@
-using BlogApp.DataAccess.Abstract;
-using BlogApp.DataAccess.Concrete;
+using System.Threading.Tasks;
+using BlogApp.DataAccess.Concrete.EntityFrameworkCore.Context;
+using BlogApp.DataAccess.EntitFrameworkCore;
+using BlogApp.DataAccess.EntitFrameworkCore.Abstract;
+using BlogApp.DataAccess.EntitFrameworkCore.Concrete;
 using BlogApp.Entity.Concrete;
-using BlogApp.DataAccess.Concrete.EntityFramework;
 using BlogApp.WebUI.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
 
 namespace BlogApp.WebUI {
     public class Startup {
@@ -24,15 +25,14 @@ namespace BlogApp.WebUI {
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
-            services.AddTransient<IBlogDal, EfBlogDal>();
-            services.AddTransient<ICategoryDal, EfCategoryDal>();
-            services.AddTransient<IUserRolesDal, EfUserClaimsDal>();
-            services.AddTransient<ILogDal, EfLogDal>();
+            services.AddTransient<IArticleRepo, ArticleRepo>();
+            services.AddTransient<ICategoryRepo, CategoryRepo>();
+            services.AddTransient<IUserRolesRepo, UserClaimsRepo>();
+            services.AddTransient<ILogRepo, LogRepo>();
             services.AddTransient<IPasswordValidator<AppUser>, CustomPasswordValidator>();
 
             services.AddDbContext<BlogDbContext>(_ => {
                 _.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                //_.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
             });
 
             services.AddIdentity<AppUser, IdentityRole>(_ => {
@@ -77,7 +77,7 @@ namespace BlogApp.WebUI {
 
             app.UseMvcWithDefaultRoute();
 
-            SeedData.Seed(userManager, roleManager);
+            InitData.Init(userManager, roleManager);
         }
     }
 }

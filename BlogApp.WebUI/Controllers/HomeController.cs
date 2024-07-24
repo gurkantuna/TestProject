@@ -1,64 +1,64 @@
-﻿using BlogApp.Core.Constants;
-using BlogApp.DataAccess.Abstract;
-using BlogApp.Entity.Concrete;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
+using BlogApp.Core.Constants;
+using BlogApp.DataAccess.EntitFrameworkCore.Abstract;
+using BlogApp.Entity.Concrete;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.WebUI.Controllers {
     public class HomeController : Controller {
 
-        private readonly IBlogDal _blogDal;
-        private readonly ILogDal _logDal;
-
-        public HomeController(IBlogDal blogDal, ILogDal logDal) {
-            _blogDal = blogDal;
-            _logDal = logDal;
+        public HomeController(IArticleRepo blogRepo, ILogRepo logRepo) {
+            _articleRepo = blogRepo;
+            _logRepo = logRepo;
         }
+
+        private readonly IArticleRepo _articleRepo;
+        private readonly ILogRepo _logRepo;
 
         public IActionResult Index() {
 
-            Log log = new Log {
+            var log = new Log {
                 Audit = "INFO",
                 Date = DateTime.Now,
                 Detail = "Home.Index()",
-                User = User.Identity.IsAuthenticated ? User.Identity.Name : ConstStrings.Anonymous,
+                User = User.Identity.IsAuthenticated ? User.Identity.Name : Strings.Anonymous,
                 Ip = HttpContext.Connection.RemoteIpAddress.ToString()
             };
 
-            _logDal.Add(log);
+            _logRepo.Add(log);
 
-            var blogs = _blogDal.GetList();
-            return View(blogs);
+            var articles = _articleRepo.GetList();
+            return View(articles);
         }
 
         [Route("/Blog/{categoryId?}")]
         public IActionResult List(int? categoryId, string q) {
 
-            IEnumerable blogs;
+            IEnumerable articles;
 
             if (!string.IsNullOrWhiteSpace(q)) {
-                blogs = _blogDal.GetList(
+                articles = _articleRepo.GetList(
                     x => x.Title.Contains(q)
                       || x.Body.Contains(q)
                       || x.Description.Contains(q)
                       || x.Image.Contains(q));
 
-                return View(blogs);
+                return View(articles);
             }
 
             if (categoryId.HasValue) {
-                blogs = _blogDal.GetList(x => x.CategoryId == categoryId
+                articles = _articleRepo.GetList(x => x.CategoryId == categoryId
                                         && x.IsApproved)
                                         .OrderByDescending(x => x.Date);
             }
             else {
-                blogs = _blogDal.GetList(x => x.IsApproved)
+                articles = _articleRepo.GetList(x => x.IsApproved)
                                         .OrderByDescending(x => x.Date);
             }
 
-            return View(blogs);
+            return View(articles);
         }
 
         public IActionResult Details() {

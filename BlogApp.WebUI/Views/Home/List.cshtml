@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blog>
+﻿@model IEnumerable<Article>
 @{
     ViewData["Title"] = "Blog";
 }
@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-9">
             @if (Model.Any()) {
-                <partial name="_BlogList" model="@Model" />
+                <partial name="_ArticleList" model="@Model" />
             }
             else {
                 <div class="alert alert-warning">There is no any blog!</div>

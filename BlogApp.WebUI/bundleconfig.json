@@ -9,7 +9,6 @@
       "wwwroot/lib/lightbox2/js/lightbox-plus-jquery.js",
       "wwwroot/lib/bootbox.js/bootbox.js",
       "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
-      //"wwwroot/js/metrica.js",
       "wwwroot/js/script.js"
     ]
   },

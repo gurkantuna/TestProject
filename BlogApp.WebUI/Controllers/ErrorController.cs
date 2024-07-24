@@ -1,24 +1,24 @@
-﻿using BlogApp.DataAccess.Abstract;
+﻿using System;
+using System.Net;
+using BlogApp.DataAccess.EntitFrameworkCore.Abstract;
 using BlogApp.Entity.Concrete;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net;
 
 namespace BlogApp.WebUI.Controllers {
     public class ErrorController : Controller {
 
-        private readonly ILogDal _logDal;
-
-        public ErrorController(ILogDal logDal) {
-            _logDal = logDal;
+        public ErrorController(ILogRepo logRepo) {
+            _logRepo = logRepo;
         }
+
+        private readonly ILogRepo _logRepo;
 
         [Route("Error")]
         public IActionResult Error() {
             var exceptionfeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            Log log = new Log {
+            var log = new Log {
                 Audit = "ERROR",
                 Date = DateTime.Now,
                 Detail = $"Path : {exceptionfeature?.Path} - Message : {exceptionfeature?.Error?.Message} - StackTrace : {exceptionfeature?.Error?.StackTrace}",
@@ -26,7 +26,7 @@ namespace BlogApp.WebUI.Controllers {
                 Ip = HttpContext.Connection.RemoteIpAddress.ToString()
             };
 
-            _logDal.Add(log);
+            _logRepo.Add(log);
 
             return View();
         }

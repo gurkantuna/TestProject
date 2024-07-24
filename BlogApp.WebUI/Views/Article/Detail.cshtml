@@ -1,0 +1,31 @@
+﻿@model Article
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            @await Component.InvokeAsync("Category")
+        </div>
+        <div class="col-md-9">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <i class="btn btn-dark btn-sm fa fa-calendar"></i>  @Model.Date.ToString("g")
+                    <text class="float-right font-weight-bold">@Model.Category?.Name</text>
+                </div>
+                <img src="~/img/@Model.Image" class="card-img-top" alt="@Model.Title">
+                <div class="card-body font-weight-light">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <hr />
+                    <p class="card-text font-italic">@Model.Description</p>
+                    <p class="card-text">@Html.Raw(Model.Body)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

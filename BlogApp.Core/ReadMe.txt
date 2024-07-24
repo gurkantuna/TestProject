@@ -1,2 +1,0 @@
-﻿Buradaki Core Projesinde CRUD metodları dışında Logging, Caching, Authentication , Authorization, Exception Handling, Performance Monitoring gibi "Cross Cutting Concerns" bulunmamaktadır. 
-Bunlar kendi GurkanTuna.Core.dll projem içinde ayrıca yer alıyor.
